@@ -14,13 +14,15 @@ Portfolio site for Juan Daniel Ramirez, Senior Applied AI Engineer. Built with p
 
 ## Run it locally
 
-Open `index.html` in a browser, or serve the folder (recommended, so the copy-email button can use the clipboard):
+With [Node.js](https://nodejs.org) 18 or newer installed, run this from the project folder:
 
 ```bash
-npx serve .
-# or
-python3 -m http.server 8000
+npm run dev
 ```
+
+It opens the site at http://localhost:3000 and **reloads the browser every time you save a file**. There's nothing to install first (no `npm install` needed) and no build step. Press `Ctrl+C` to stop it.
+
+Without Node.js, you can also just double-click `index.html`, but you'll need to refresh the page yourself after each change.
 
 ## Update the content
 
@@ -48,5 +50,7 @@ python3 -m http.server 8000
 ├── css/styles.css    # Design tokens, layout, and components
 ├── js/data.js        # ← Your content
 ├── js/main.js        # Renders data.js and handles interactions
-└── assets/           # Favicon, project images, résumé
+├── assets/           # Favicon, project images, résumé
+├── package.json      # `npm run dev` script (no dependencies)
+└── scripts/dev-server.mjs  # Local server that reloads on save
 ```
