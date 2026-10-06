@@ -16,6 +16,7 @@ window.PORTFOLIO = {
   tagline:
     "I build production AI systems for regulated industries: multi-agent RAG, LLM features with guardrails and evals, and the data pipelines that feed them.",
   location: "Texas, United States",
+  experienceYears: "7+",
   education: "Bachelor's in Computer Science, Fontbonne University",
   availability: "", // e.g. "Open to new opportunities" shows a status badge
   email: "juandanielramirezjr1@gmail.com",
@@ -32,10 +33,11 @@ window.PORTFOLIO = {
   ],
 
   stats: [
-    { value: "7+", label: "Years building production software" },
-    { value: "500K+", label: "Users on banking services I engineered" },
-    { value: "30–40%", label: "Less clinician documentation time" },
-    { value: "120+", label: "Hours of manual reporting automated monthly" },
+    // `source` says where the number comes from.
+    { value: "7+", label: "Years building production software", source: "Since 2019" },
+    { value: "500K+", label: "Users on banking services I engineered", source: "Q2 Holdings" },
+    { value: "30–40%", label: "Less clinician documentation time", source: "Lindy" },
+    { value: "120+", label: "Hours of manual reporting automated monthly", source: "Orbital Education" },
   ],
 
   skills: [
@@ -123,7 +125,8 @@ window.PORTFOLIO = {
 
   projects: [
     // `image`, `live`, and `code` are optional. Without an image the card gets
-    // a generated cover; without links the card simply has none.
+    // a generated cover; without links the card simply has none. `result` and
+    // `pipeline` are optional extras that the concept design shows.
     {
       title: "Clinical RAG Platform",
       org: "Lindy · Healthcare",
@@ -131,6 +134,15 @@ window.PORTFOLIO = {
         "A multi-agent hybrid RAG platform for clinical workflows that combines EHR context, knowledge graphs, and vector retrieval. It cut clinician documentation time by 30–40% with HIPAA-compliant auditability.",
       tags: ["AI agents", "RAG", "LangGraph", "Vertex AI", "LLM evals", "Guardrails"],
       featured: true,
+      result: "30–40% less clinician documentation time",
+      pipeline: [
+        { stage: "Capture", items: ["Voice capture", "Speech-to-text"] },
+        { stage: "Retrieve", items: ["BM25 keyword search", "Vector search", "Metadata filters", "Knowledge graph"] },
+        { stage: "Generate", items: ["Summarization agent", "EHR-intent agent"] },
+        { stage: "Safeguard", items: ["Evals & drift checks", "Guardrails", "Audit log"] },
+      ],
+      pipelineNote:
+        "Agents are orchestrated with LangGraph on the A2A protocol, with an MCP layer for tool authorization and encrypted context passing.",
     },
     {
       title: "Due Diligence Assistant",

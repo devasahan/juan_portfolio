@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Juan Daniel Ramirez — Senior Applied AI Engineer</title>
+    <meta
+      name="description"
+      content="Juan Daniel Ramirez is a Senior Applied AI Engineer building multi-agent RAG systems, LLM features with guardrails and evals, and data pipelines for healthcare, FinTech, and EdTech."
+    />
+    <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1118" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Apply the saved theme before first paint (shared with the main site). -->
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("theme");
+          if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+    <script src="../js/data.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="layout">
+      <header class="profile" data-render="profile"></header>
+
+      <main class="content" id="main">
+        <noscript><p>This portfolio needs JavaScript enabled to show its content.</p></noscript>
+
+        <section class="block" id="about" aria-labelledby="about-title">
+          <h2 class="block-label" id="about-title">About</h2>
+          <div data-render="about"></div>
+        </section>
+
+        <section class="block" id="impact" aria-labelledby="impact-title">
+          <h2 class="block-label" id="impact-title">Impact</h2>
+          <div data-render="impact"></div>
+        </section>
+
+        <section class="block" id="work" aria-labelledby="work-title">
+          <h2 class="block-label" id="work-title">Selected work</h2>
+          <p class="block-note">Built for employers, so the code and demos aren't public.</p>
+          <div data-render="work"></div>
+        </section>
+
+        <section class="block" id="skills" aria-labelledby="skills-title">
+          <h2 class="block-label" id="skills-title">Skills</h2>
+          <div data-render="skills"></div>
+        </section>
+
+        <section class="block" id="contact" aria-labelledby="contact-title">
+          <h2 class="block-label" id="contact-title">Contact</h2>
+          <div data-render="contact"></div>
+        </section>
+
+        <footer class="footnote" data-render="footer"></footer>
+      </main>
+    </div>
+  </body>
+</html>
