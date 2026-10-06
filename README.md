@@ -4,7 +4,7 @@ Portfolio site for Juan Daniel Ramirez, Senior Applied AI Engineer. Built with p
 
 **Features**
 
-- Hero, About, Skills, Projects, Experience, and Contact sections
+- Hero, About, Skills, Projects, and Contact sections
 - All personal content lives in one file, [`js/data.js`](js/data.js)
 - Light and dark themes (follows the system setting, with a manual toggle that's remembered)
 - Responsive from small phones to wide desktops, with a mobile menu
@@ -26,15 +26,14 @@ Without Node.js, you can also just double-click `index.html`, but you'll need to
 
 ## Update the content
 
-1. **Edit [`js/data.js`](js/data.js).** This file controls the name, role, tagline, location, education, email, social links, about text, stats, skills, projects, and experience.
-   - Remove a section by emptying its array (e.g. `experience: []`); its nav link disappears too.
+1. **Edit [`js/data.js`](js/data.js).** This file controls the name, role, tagline, location, education, email, social links, about text, stats, skills, and projects.
+   - Remove a section by emptying its array (e.g. `stats: []`); its nav link disappears too.
    - Set `availability` (e.g. `"Open to new opportunities"`) to show a status badge; `""` hides it.
 2. **Add project screenshots** (optional): put images in `assets/projects/` and set each project's `image`, e.g. `"assets/projects/taskflow.png"`. A 16:9 ratio looks best.
-3. **Résumé:** the PDF lives at `assets/Juan_Daniel_Ramirez_Resume.pdf`. Replace the file to update it, or set `resume: ""` to hide the button.
-4. **Update the `<head>` in [`index.html`](index.html):** the `<title>`, `description`, and `og:` tags. Link previews on LinkedIn, Slack, and X read these directly.
-5. **Section headings and the contact blurb** are plain text in `index.html` if you want to reword them.
-6. **Colors and fonts** are CSS variables at the top of [`css/styles.css`](css/styles.css). Change `--accent` and `--accent-2` to re-theme the whole site.
-7. **Favicon:** edit the letter in [`assets/favicon.svg`](assets/favicon.svg).
+3. **Update the `<head>` in [`index.html`](index.html):** the `<title>`, `description`, and `og:` tags. Link previews on LinkedIn, Slack, and X read these directly.
+4. **Section headings and the contact blurb** are plain text in `index.html` if you want to reword them.
+5. **Colors and fonts** are CSS variables at the top of [`css/styles.css`](css/styles.css). Change `--accent` and `--accent-2` to re-theme the whole site.
+6. **Favicon:** edit the letter in [`assets/favicon.svg`](assets/favicon.svg).
 
 ## Deploy
 
@@ -50,7 +49,7 @@ Without Node.js, you can also just double-click `index.html`, but you'll need to
 ├── css/styles.css    # Design tokens, layout, and components
 ├── js/data.js        # ← Your content
 ├── js/main.js        # Renders data.js and handles interactions
-├── assets/           # Favicon, project images, résumé
+├── assets/           # Favicon and project images
 ├── package.json      # `npm run dev` script (no dependencies)
 └── scripts/dev-server.mjs  # Local server that reloads on save
 ```

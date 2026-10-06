@@ -31,7 +31,6 @@
       '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
     sparkles:
       '<path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/><path d="M19 3v4M21 5h-4"/>',
-    file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8M16 17H8M10 9H8"/>',
     graduation:
       '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
     database:
@@ -181,7 +180,6 @@
         hasItems(data.projects) &&
           h("a", { class: "btn btn-primary", href: "#projects" }, "View my work", icon("arrowRight")),
         h("a", { class: "btn btn-ghost", href: "#contact" }, "Get in touch"),
-        data.resume && h("a", { class: "btn btn-ghost", ...linkAttrs(data.resume) }, icon("file"), "Résumé"),
       ),
       socialLinks(),
     );
@@ -417,55 +415,6 @@
     mount("projects", filters, grid);
   }
 
-  function renderExperience() {
-    if (!hasItems(data.experience)) return removeSection("experience");
-
-    mount(
-      "experience",
-      h(
-        "ol",
-        { class: "timeline" },
-        stagger(
-          data.experience.map((job) =>
-            h(
-              "li",
-              { class: `timeline-item${/present/i.test(job.period || "") ? " is-current" : ""}` },
-              h(
-                "article",
-                { class: "card timeline-card" },
-                h(
-                  "div",
-                  { class: "timeline-head" },
-                  h(
-                    "h3",
-                    { class: "timeline-role" },
-                    job.role,
-                    job.company && [" · ", h("span", { class: "timeline-company" }, job.company)],
-                  ),
-                  job.period && h("p", { class: "timeline-period" }, job.period),
-                ),
-                job.location && h("p", { class: "timeline-location" }, job.location),
-                hasItems(job.points) &&
-                  h(
-                    "ul",
-                    { class: "timeline-points" },
-                    job.points.map((point) => h("li", null, point)),
-                  ),
-                hasItems(job.tags) &&
-                  h(
-                    "ul",
-                    { class: "tags" },
-                    job.tags.map((tag) => h("li", { class: "tag" }, tag)),
-                  ),
-              ),
-            ),
-          ),
-          90,
-        ),
-      ),
-    );
-  }
-
   function renderContact() {
     const copyLabel = h("span", { "aria-live": "polite" }, "Copy email");
     let resetTimer;
@@ -668,7 +617,6 @@
   renderAbout();
   renderSkills();
   renderProjects();
-  renderExperience();
   renderContact();
   renderFooter();
   numberSections();

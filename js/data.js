@@ -3,10 +3,10 @@
  *
  * Everything personal on the page is rendered from this object, so updating
  * your info shouldn't require touching index.html or main.js. Remove an
- * array's items (e.g. `experience: []`) to hide that section entirely.
+ * array's items (e.g. `stats: []`) to hide that section entirely.
  *
  * Available icon names: github, linkedin, x, mail, globe, code, layers,
- * wrench, sparkles, search, database, cloud, shield, file, mapPin,
+ * wrench, sparkles, search, database, cloud, shield, mapPin,
  * briefcase, graduation.
  */
 window.PORTFOLIO = {
@@ -19,7 +19,6 @@ window.PORTFOLIO = {
   education: "Bachelor's in Computer Science, Fontbonne University",
   availability: "", // e.g. "Open to new opportunities" shows a status badge
   email: "juandanielramirezjr1@gmail.com",
-  resume: "assets/Juan_Daniel_Ramirez_Resume.pdf", // "" hides the résumé button
   focus: ["RAG & AI agents", "LLM evaluation", "Healthcare, FinTech & EdTech"],
 
   socials: [
@@ -167,74 +166,6 @@ window.PORTFOLIO = {
       description:
         "Scores short-answer and essay responses against a rubric and returns structured feedback that teachers review and approve before any grade is recorded.",
       tags: ["OpenAI", "Structured output", "Human-in-the-loop"],
-    },
-  ],
-
-  experience: [
-    // Most recent first; a period containing "Present" marks the current role.
-    {
-      role: "Applied AI Engineer",
-      company: "Lindy",
-      period: "Feb 2025 – Present",
-      location: "San Francisco, California · Remote",
-      points: [
-        "Led architecture and production deployment of a multi-agent hybrid RAG platform for clinical workflows, cutting clinician documentation time by 30–40% with HIPAA-compliant auditability.",
-        "Built a hybrid retrieval layer combining BM25, dense vector retrieval, metadata filtering, and graph-linked records, improving answer relevance and reducing hallucinations.",
-        "Designed agent orchestration in LangChain and LangGraph on the A2A protocol with an MCP layer for state handoffs, tool authorization, and encrypted context passing.",
-        "Established an agent evaluation framework with A/B tests, model evals, drift detection, and automated rollback triggers to support safe continuous deployment.",
-      ],
-      tags: ["LangGraph", "A2A", "MCP", "Vertex AI", "BigQuery"],
-    },
-    {
-      role: "AI Engineer",
-      company: "Acquire.com",
-      period: "Jul 2024 – Feb 2025",
-      location: "San Francisco, California · Remote",
-      points: [
-        "Shipped AI-generated, listing-specific questions that help buyers start conversations with sellers, with guardrails, Redis caching, Langfuse tracing, and an A/B test.",
-        "Built an AI due diligence task manager that redacts PII with Microsoft Presidio and adapts an M&A advisor's checklist to each business type.",
-        "Designed semantic buyer–listing matching on OpenAI embeddings with PostgreSQL and pgvector.",
-        "Provisioned the infrastructure for all three AI features with Terraform.",
-      ],
-      tags: ["FastAPI", "OpenAI", "Celery", "pgvector", "Terraform"],
-    },
-    {
-      role: "AI Engineer",
-      company: "Orbital Education",
-      period: "Jun 2021 – Jun 2024",
-      location: "Dallas, Texas · On-site",
-      points: [
-        "Built an LLM chatbot that answers staff questions about attendance, grades, and records for 5,000+ students using function calling with role-based access control.",
-        "Developed rubric-based LLM grading with structured feedback that teachers approve before grades are recorded.",
-        "Engineered OCR and LLM document extraction and Spring Batch ETL pipelines processing about 30,000 records nightly, eliminating 120+ hours of manual reporting each month.",
-        "Led a team of three engineers across technical planning, mentoring, code reviews, and production delivery.",
-      ],
-      tags: ["OpenAI", "Java", "Spring Batch", "PostgreSQL"],
-    },
-    {
-      role: "Software Engineer",
-      company: "Q2 Holdings",
-      period: "May 2020 – May 2021",
-      location: "Austin, Texas · On-site",
-      points: [
-        "Engineered TypeScript (Node.js) and Python microservices for a regulated digital banking platform serving 500,000+ users.",
-        "Developed secure REST APIs on AWS with OAuth 2.0, PostgreSQL, and Redis for web, iOS, and Android apps.",
-        "Cleared peak-load backlogs by tuning Celery and Redis with dedicated queues, worker concurrency, pipelining, and connection pooling.",
-        "Helped build CI/CD pipelines and automated testing standards adopted by more than 15 internal teams.",
-      ],
-      tags: ["TypeScript", "Python", "AWS", "RabbitMQ", "Jenkins"],
-    },
-    {
-      role: "Software Engineer (Part-Time)",
-      company: "Bottle Rocket",
-      period: "Mar 2019 – May 2020",
-      location: "Dallas, Texas · On-site",
-      points: [
-        "Maintained and modernized client web apps in React and Node.js, improving stability, performance, and maintainability.",
-        "Built REST APIs with Express.js to power React front ends and integrate third-party services.",
-        "Fixed memory leaks, blocked event loops, slow API responses, and unnecessary re-renders using Chrome DevTools, the React Profiler, and the Node.js inspector.",
-      ],
-      tags: ["React", "Node.js", "Express.js", "AWS"],
     },
   ],
 };
