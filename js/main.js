@@ -97,6 +97,11 @@
     return hash % 360;
   }
 
+  /** A screenshot of a public site, rendered by WordPress's free mShots service. */
+  function screenshotOf(url) {
+    return `https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=1280&h=800`;
+  }
+
   function initials(text) {
     return text
       .split(/\s+/)
@@ -327,17 +332,25 @@
     if (!hasItems(data.projects)) return removeSection("projects");
 
     const cards = data.projects.map((project) => {
+      const placeholder = () =>
+        h("span", { class: "project-initials", "aria-hidden": "true" }, initials(project.title));
+      const shot =
+        (project.image || project.live) &&
+        h("img", {
+          src: project.image || screenshotOf(project.live),
+          alt: `Screenshot of ${project.title}`,
+          loading: "lazy",
+        });
+      shot?.addEventListener("error", () => shot.replaceWith(placeholder()));
       const cover = h(
         "div",
         { class: "project-cover", style: `--hue: ${project.hue ?? hueFrom(project.title)}` },
-        project.image
-          ? h("img", { src: project.image, alt: `Screenshot of ${project.title}`, loading: "lazy" })
-          : h("span", { class: "project-initials", "aria-hidden": "true" }, initials(project.title)),
+        shot || placeholder(),
       );
 
       const links = [
         project.live &&
-          h("a", { class: "text-link", ...linkAttrs(project.live) }, "Live demo", icon("external")),
+          h("a", { class: "text-link", ...linkAttrs(project.live) }, "Visit site", icon("external")),
         project.code &&
           h("a", { class: "text-link", ...linkAttrs(project.code) }, icon("github"), "Source code"),
       ].filter(Boolean);

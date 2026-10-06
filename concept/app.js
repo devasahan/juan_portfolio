@@ -99,6 +99,28 @@
     $(`#${id}`)?.remove();
   }
 
+  /** A screenshot of a public site, rendered by WordPress's free mShots service. */
+  function screenshotOf(url) {
+    return `https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=1280&h=800`;
+  }
+
+  function hostOf(url) {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+    }
+  }
+
+  function initials(text) {
+    return text
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((word) => word[0].toUpperCase())
+      .join("");
+  }
+
   /** "30–40% less documentation time" -> { value: "30–40%", label: "less documentation time" } */
   function splitResult(text) {
     const match = /^(\S*\d\S*)\s+(.+)$/.exec(text);
@@ -277,7 +299,7 @@
 
   function caseLinks(project) {
     const links = [
-      project.live && h("a", linkAttrs(project.live), "Live demo", icon("external")),
+      project.live && h("a", linkAttrs(project.live), "Visit site", icon("external")),
       project.code && h("a", linkAttrs(project.code), icon("github"), "Source code"),
     ].filter(Boolean);
     return hasItems(links) && h("div", { class: "case-links" }, links);
@@ -342,7 +364,7 @@
       "li",
       { class: "case-row" },
       project.org && h("p", { class: "case-org" }, project.org),
-      h("h3", { class: "case-row-title" }, project.title),
+      h("h4", { class: "case-row-title" }, project.title),
       h("p", { class: "case-desc" }, project.description),
       project.result && h("p", { class: "case-row-result" }, icon("check"), project.result),
       tagList(project.tags),
@@ -350,14 +372,72 @@
     );
   }
 
+  /** A live website: a browser-framed screenshot that links to the site. */
+  function renderSite(project) {
+    const host = hostOf(project.live);
+    const shot = h("img", {
+      class: "site-shot",
+      src: project.image || screenshotOf(project.live),
+      alt: "",
+      loading: "lazy",
+    });
+    shot.addEventListener("error", () =>
+      shot.replaceWith(h("span", { class: "site-fallback" }, initials(project.title))),
+    );
+
+    return h(
+      "li",
+      { class: "site" },
+      h(
+        "a",
+        {
+          ...linkAttrs(project.live),
+          class: "site-preview",
+          "aria-label": `Visit the ${project.title} website (opens in a new tab)`,
+        },
+        h(
+          "span",
+          { class: "site-bar", "aria-hidden": "true" },
+          h("span", { class: "site-dots" }),
+          h("span", { class: "site-url" }, host),
+        ),
+        shot,
+      ),
+      h(
+        "div",
+        { class: "site-body" },
+        h("h4", { class: "site-title" }, project.title),
+        project.description && h("p", { class: "case-desc" }, project.description),
+        tagList(project.tags),
+        h("a", { ...linkAttrs(project.live), class: "site-link" }, `Visit ${host}`, icon("external")),
+      ),
+    );
+  }
+
   function renderWork() {
     if (!hasItems(data.projects)) return removeSection("work");
     const featured = data.projects.find((project) => project.featured) || data.projects[0];
-    const rest = data.projects.filter((project) => project !== featured);
+    const others = data.projects.filter((project) => project !== featured);
+    const sites = others.filter((project) => project.live);
+    const roles = others.filter((project) => !project.live);
     mount(
       "work",
       renderFeatured(featured),
-      hasItems(rest) && h("ul", { class: "cases" }, rest.map(renderCaseRow)),
+      hasItems(sites) &&
+        h(
+          "div",
+          { class: "work-group" },
+          h("h3", { class: "work-group-title" }, "Live websites"),
+          h("ul", { class: "sites" }, sites.map(renderSite)),
+        ),
+      hasItems(roles) &&
+        h(
+          "div",
+          { class: "work-group" },
+          h("h3", { class: "work-group-title" }, "More from my roles"),
+          h("p", { class: "block-note" }, "Built for employers, so the code and demos aren't public."),
+          h("ul", { class: "cases" }, roles.map(renderCaseRow)),
+        ),
     );
   }
 

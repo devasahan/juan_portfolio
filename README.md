@@ -34,7 +34,7 @@ There's no `npm install` and no build step. Press `Ctrl+C` to stop. Next time, o
 1. **Edit [`js/data.js`](js/data.js).** This file controls the name, role, tagline, location, education, email, social links, about text, stats, skills, and projects.
    - Remove a section by emptying its array (e.g. `stats: []`); its nav link disappears too.
    - Set `availability` (e.g. `"Open to new opportunities"`) to show a status badge; `""` hides it.
-2. **Add project screenshots** (optional): put images in `assets/projects/` and set each project's `image`, e.g. `"assets/projects/taskflow.png"`. A 16:9 ratio looks best.
+2. **Live websites:** give a project a `live` URL and it shows as a website with a screenshot of the site, taken automatically by WordPress's free [mShots](https://s0.wp.com/mshots/v1/) service when someone views the portfolio. To use your own picture instead, put it in `assets/projects/` and set the project's `image`, e.g. `"assets/projects/early-sparks.png"` (16:10 looks best).
 3. **Update the `<head>` in [`index.html`](index.html):** the `<title>`, `description`, and `og:` tags. Link previews on LinkedIn, Slack, and X read these directly.
 4. **Section headings and the contact blurb** are plain text in `index.html` if you want to reword them.
 5. **Colors and fonts** are CSS variables at the top of [`css/styles.css`](css/styles.css). Change `--accent` and `--accent-2` to re-theme the whole site.

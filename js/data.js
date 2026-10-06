@@ -151,7 +151,8 @@ window.PORTFOLIO = {
   projects: [
     // `image`, `live`, and `code` are optional. Without an image the card gets
     // a generated cover; without links the card simply has none. `result` and
-    // `pipeline` are optional extras that the concept design shows.
+    // `pipeline` are optional extras that the concept design shows. A project
+    // with a `live` URL is shown as a website, with a screenshot of the site.
     {
       title: "Clinical RAG Platform",
       org: "Lindy · Healthcare",
@@ -171,6 +172,11 @@ window.PORTFOLIO = {
       ],
       pipelineNote:
         "Agents are orchestrated with LangGraph on the A2A protocol, with an MCP layer for tool authorization and encrypted context passing.",
+    },
+    {
+      title: "Early Sparks",
+      description: "A website I built for Early Sparks.",
+      live: "https://www.earlysparksmc.org/",
     },
     {
       title: "Digital Banking Microservices",
