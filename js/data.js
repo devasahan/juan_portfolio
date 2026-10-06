@@ -137,7 +137,10 @@ window.PORTFOLIO = {
       result: "30–40% less clinician documentation time",
       pipeline: [
         { stage: "Capture", items: ["Voice capture", "Speech-to-text"] },
-        { stage: "Retrieve", items: ["BM25 keyword search", "Vector search", "Metadata filters", "Knowledge graph"] },
+        {
+          stage: "Retrieve",
+          items: ["BM25 keyword search", "Vector search", "Metadata filters", "Knowledge graph"],
+        },
         { stage: "Generate", items: ["Summarization agent", "EHR-intent agent"] },
         { stage: "Safeguard", items: ["Evals & drift checks", "Guardrails", "Audit log"] },
       ],
