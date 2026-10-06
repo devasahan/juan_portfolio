@@ -37,6 +37,8 @@
       '<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>',
     wrench:
       '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    building:
+      '<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>',
     mapPin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
     briefcase:
       '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
@@ -55,7 +57,7 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const hasItems = (list) => Array.isArray(list) && list.length > 0;
-  const plural = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
+  const plural = (count, word, words = `${word}s`) => `${count} ${count === 1 ? word : words}`;
 
   /** Minimal element builder: h("a", { href: "#" }, "text", childNode, [more]). */
   function h(tag, props, ...children) {
@@ -114,12 +116,18 @@
     const meta = [
       data.location && [icon("mapPin"), data.location],
       data.experienceYears && [icon("briefcase"), `${data.experienceYears} years in production`],
+      hasItems(data.domains) && [icon("building"), data.domains.map((domain) => domain.name).join(" · ")],
     ].filter(Boolean);
 
     // Each nav entry says what's inside, so a recruiter knows where to jump.
     const sections = [
       { id: "about", label: "About" },
       { id: "impact", label: "Impact", hint: hasItems(data.stats) && plural(data.stats.length, "result") },
+      {
+        id: "domains",
+        label: "Domains",
+        hint: hasItems(data.domains) && plural(data.domains.length, "industry", "industries"),
+      },
       {
         id: "work",
         label: "Selected work",
@@ -226,6 +234,30 @@
             h("strong", { class: "metric-value" }, stat.value),
             h("span", { class: "metric-label" }, stat.label),
             stat.source && h("span", { class: "metric-source" }, stat.source),
+          ),
+        ),
+      ),
+    );
+  }
+
+  function renderDomains() {
+    if (!hasItems(data.domains)) return removeSection("domains");
+    mount(
+      "domains",
+      h(
+        "ul",
+        { class: "domains" },
+        data.domains.map((domain) =>
+          h(
+            "li",
+            { class: "domain" },
+            h(
+              "p",
+              { class: "domain-head" },
+              h("strong", { class: "domain-name" }, domain.name),
+              domain.where && h("span", { class: "domain-where" }, domain.where),
+            ),
+            domain.detail && h("p", { class: "domain-detail" }, domain.detail),
           ),
         ),
       ),
@@ -468,6 +500,7 @@
   if (data.name && data.role) document.title = `${data.name} — ${data.role}`;
   renderAbout();
   renderImpact();
+  renderDomains();
   renderWork();
   renderSkills();
   renderContact();

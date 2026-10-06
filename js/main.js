@@ -245,6 +245,11 @@
     const facts = [
       data.location && { icon: "mapPin", label: "Based in", value: data.location },
       hasItems(data.focus) && { icon: "sparkles", label: "Focused on", value: data.focus.join(", ") },
+      hasItems(data.domains) && {
+        icon: "layers",
+        label: "Domains",
+        value: data.domains.map((domain) => domain.name).join(", "),
+      },
       data.education && { icon: "graduation", label: "Education", value: data.education },
       data.availability && { icon: "briefcase", label: "Status", value: data.availability },
     ].filter(Boolean);

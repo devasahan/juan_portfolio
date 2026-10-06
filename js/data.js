@@ -15,13 +15,37 @@ window.PORTFOLIO = {
   role: "Senior Software Engineer",
   specialty: "AI & backend",
   tagline:
-    "I design and build backend systems and production AI features: APIs, microservices, data pipelines, and LLM-powered services for regulated industries.",
+    "I build backend systems and production AI for healthcare, FinTech, and EdTech: APIs, microservices, data pipelines, and LLM-powered services.",
   location: "Texas, United States",
   experienceYears: "7+",
   education: "Bachelor's in Computer Science, Fontbonne University",
   availability: "", // e.g. "Open to new opportunities" shows a status badge
   email: "juandanielramirezjr1@gmail.com",
   focus: ["Backend & APIs", "AI & LLM systems", "Data pipelines"],
+
+  // Industries worked in: where, and what that work involved.
+  domains: [
+    {
+      name: "Healthcare",
+      where: "Lindy",
+      detail: "Clinical AI workflows, EHR integration, and HIPAA compliance",
+    },
+    {
+      name: "FinTech",
+      where: "Q2 Holdings",
+      detail: "Regulated digital banking for 500K+ users, secured with OAuth 2.0",
+    },
+    {
+      name: "EdTech",
+      where: "Orbital Education",
+      detail: "Student records, grading, and reporting for 5,000+ students",
+    },
+    {
+      name: "Marketplaces",
+      where: "Acquire.com",
+      detail: "Buying and selling businesses: buyer matching, due diligence, and PII redaction",
+    },
+  ],
 
   socials: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/juan-ramirez-127360365/", icon: "linkedin" },
