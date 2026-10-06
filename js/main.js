@@ -172,7 +172,7 @@
         h("span", { class: "accent-text" }, data.shortName || data.name),
         ".",
       ),
-      data.role && h("p", { class: "hero-role" }, data.role),
+      data.role && h("p", { class: "hero-role" }, [data.role, data.specialty].filter(Boolean).join(" · ")),
       data.tagline && h("p", { class: "hero-tagline" }, data.tagline),
       h(
         "div",
@@ -208,6 +208,7 @@
 
     const lines = [[tok("kw", "const "), tok("var", varName), tok("punc", " = {")]];
     if (data.role) lines.push(prop("role", str(data.role)));
+    if (data.specialty) lines.push(prop("specialty", str(data.specialty)));
     if (data.location) lines.push(prop("location", str(data.location)));
     if (hasItems(data.focus)) {
       lines.push(["  focus", tok("punc", ": [")]);
@@ -354,6 +355,7 @@
             ),
             project.org && h("p", { class: "project-org" }, project.org),
             h("p", { class: "project-desc" }, project.description),
+            project.result && h("p", { class: "project-result" }, icon("check"), project.result),
             h(
               "div",
               { class: "project-foot" },

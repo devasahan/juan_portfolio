@@ -12,15 +12,16 @@
 window.PORTFOLIO = {
   name: "Juan Daniel Ramirez",
   shortName: "Juan", // used in the hero greeting
-  role: "Senior Applied AI Engineer",
+  role: "Senior Software Engineer",
+  specialty: "AI & backend",
   tagline:
-    "I build production AI systems for regulated industries: multi-agent RAG, LLM features with guardrails and evals, and the data pipelines that feed them.",
+    "I design and build backend systems and production AI features: APIs, microservices, data pipelines, and LLM-powered services for regulated industries.",
   location: "Texas, United States",
   experienceYears: "7+",
   education: "Bachelor's in Computer Science, Fontbonne University",
   availability: "", // e.g. "Open to new opportunities" shows a status badge
   email: "juandanielramirezjr1@gmail.com",
-  focus: ["RAG & AI agents", "LLM evaluation", "Healthcare, FinTech & EdTech"],
+  focus: ["Backend & APIs", "AI & LLM systems", "Data pipelines"],
 
   socials: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/juan-ramirez-127360365/", icon: "linkedin" },
@@ -28,16 +29,16 @@ window.PORTFOLIO = {
   ],
 
   about: [
-    "I'm a Senior Applied AI Engineer with 7+ years of experience building secure platforms in regulated industries: healthcare, FinTech, EdTech, and online marketplaces.",
-    "Most recently I've been shipping multi-agent RAG systems for clinical workflows, production LLM features with guardrails and evaluations, and the data pipelines behind them. Before moving into AI, I engineered digital banking services used by more than 500,000 people.",
+    "I'm a senior software engineer with 7+ years of experience building secure, reliable backend systems for regulated industries: healthcare, FinTech, EdTech, and online marketplaces.",
+    "I specialize in backend engineering and AI: microservices and REST APIs, data pipelines and messaging, and production LLM features with guardrails and evaluations. That work ranges from digital banking services used by more than 500,000 people to a multi-agent RAG platform that cut clinician documentation time by 30–40%.",
   ],
 
   stats: [
     // `source` says where the number comes from.
-    { value: "7+", label: "Years building production software", source: "Since 2019" },
     { value: "500K+", label: "Users on banking services I engineered", source: "Q2 Holdings" },
-    { value: "30–40%", label: "Less clinician documentation time", source: "Lindy" },
+    { value: "~30K", label: "Records processed nightly by my ETL pipelines", source: "Orbital Education" },
     { value: "120+", label: "Hours of manual reporting automated monthly", source: "Orbital Education" },
+    { value: "30–40%", label: "Less clinician documentation time", source: "Lindy" },
   ],
 
   skills: [
@@ -54,6 +55,36 @@ window.PORTFOLIO = {
         "Node.js",
         "Express.js",
         "React",
+      ],
+    },
+    {
+      group: "Databases & messaging",
+      icon: "database",
+      items: [
+        "PostgreSQL",
+        "pgvector",
+        "Redis",
+        "BigQuery",
+        "Feast",
+        "ETL/ELT pipelines",
+        "Spring Batch",
+        "Celery",
+        "RabbitMQ",
+      ],
+    },
+    {
+      group: "Cloud & DevOps",
+      icon: "cloud",
+      items: [
+        "Google Cloud",
+        "AWS",
+        "Azure",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "Jenkins",
+        "GitHub Actions",
+        "CI/CD",
       ],
     },
     {
@@ -87,36 +118,6 @@ window.PORTFOLIO = {
       ],
     },
     {
-      group: "Data & messaging",
-      icon: "database",
-      items: [
-        "PostgreSQL",
-        "pgvector",
-        "Redis",
-        "BigQuery",
-        "Feast",
-        "ETL/ELT pipelines",
-        "Spring Batch",
-        "Celery",
-        "RabbitMQ",
-      ],
-    },
-    {
-      group: "Cloud & DevOps",
-      icon: "cloud",
-      items: [
-        "Google Cloud",
-        "AWS",
-        "Azure",
-        "Docker",
-        "Kubernetes",
-        "Terraform",
-        "Jenkins",
-        "GitHub Actions",
-        "CI/CD",
-      ],
-    },
-    {
       group: "Security & compliance",
       icon: "shield",
       items: ["OAuth 2.0", "RBAC", "PII redaction (Presidio)", "HIPAA", "NIST AI RMF", "Audit logging"],
@@ -131,7 +132,7 @@ window.PORTFOLIO = {
       title: "Clinical RAG Platform",
       org: "Lindy · Healthcare",
       description:
-        "A multi-agent hybrid RAG platform for clinical workflows that combines EHR context, knowledge graphs, and vector retrieval. It cut clinician documentation time by 30–40% with HIPAA-compliant auditability.",
+        "A multi-agent RAG platform for clinical workflows that combines EHR context, knowledge graphs, and vector retrieval, running on GCP inference pipelines with on-prem/cloud routing, low-latency autoscaling, and HIPAA-compliant auditability.",
       tags: ["AI agents", "RAG", "LangGraph", "Vertex AI", "LLM evals", "Guardrails"],
       featured: true,
       result: "30–40% less clinician documentation time",
@@ -148,6 +149,22 @@ window.PORTFOLIO = {
         "Agents are orchestrated with LangGraph on the A2A protocol, with an MCP layer for tool authorization and encrypted context passing.",
     },
     {
+      title: "Digital Banking Microservices",
+      org: "Q2 Holdings · FinTech",
+      description:
+        "TypeScript (Node.js) and Python microservices for authentication, accounts, investments, and transactions on a regulated banking platform, with secure REST APIs on AWS and RabbitMQ messaging to decouple transaction events.",
+      tags: ["TypeScript", "Node.js", "Python", "AWS", "OAuth 2.0", "RabbitMQ", "PostgreSQL", "Redis"],
+      result: "500K+ users across web, iOS, and Android",
+    },
+    {
+      title: "Student Data Pipelines",
+      org: "Orbital Education · EdTech",
+      description:
+        "Spring Batch ETL pipelines on Quartz schedules that consolidate student, attendance, and grading data into audit-ready PostgreSQL reporting models, hardened with restartable steps, skip policies, and failure alerts.",
+      tags: ["Java", "Spring Batch", "PostgreSQL", "ETL"],
+      result: "~30,000 records nightly, replacing 120+ hours of manual reporting a month",
+    },
+    {
       title: "Due Diligence Assistant",
       org: "Acquire.com · Marketplace",
       description:
@@ -155,32 +172,19 @@ window.PORTFOLIO = {
       tags: ["OpenAI", "Structured output", "LLM evals", "Celery", "PostgreSQL"],
     },
     {
+      title: "Peak-Load Queue Tuning",
+      org: "Q2 Holdings · FinTech",
+      description:
+        "Diagnosed Celery and Redis bottlenecks with Flower and Redis SLOWLOG, then routed long-running tasks to dedicated queues, tuned worker concurrency and prefetch, and added pipelining and connection pooling.",
+      tags: ["Python", "Celery", "Redis"],
+      result: "Cleared task backlogs at peak load",
+    },
+    {
       title: "Buyer–Listing Matching",
       org: "Acquire.com · Marketplace",
       description:
         "Semantic matching between buyers and businesses for sale, pairing vector similarity search with budget and business-type filters and LLM-written match explanations.",
       tags: ["OpenAI", "Embeddings", "pgvector", "PostgreSQL"],
-    },
-    {
-      title: "Conversation Starters",
-      org: "Acquire.com · Marketplace",
-      description:
-        "Generates 3–5 listing-specific questions that help buyers open conversations with sellers, with guardrails, per-listing caching to cut inference costs, full prompt tracing, and an A/B test on replies.",
-      tags: ["OpenAI", "FastAPI", "Structured output", "Guardrails", "Redis", "Langfuse"],
-    },
-    {
-      title: "Student Records Chatbot",
-      org: "Orbital Education · EdTech",
-      description:
-        "Lets school staff ask plain-English questions about attendance, grades, and records for 5,000+ students, answered from the reporting database through function calling with role-based access control.",
-      tags: ["OpenAI", "Function calling", "PostgreSQL", "RBAC"],
-    },
-    {
-      title: "Rubric-Based Grading",
-      org: "Orbital Education · EdTech",
-      description:
-        "Scores short-answer and essay responses against a rubric and returns structured feedback that teachers review and approve before any grade is recorded.",
-      tags: ["OpenAI", "Structured output", "Human-in-the-loop"],
     },
   ],
 };

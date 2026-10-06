@@ -171,7 +171,8 @@
             data.availability,
           ),
         h("h1", { class: "profile-name" }, data.name),
-        data.role && h("p", { class: "profile-role" }, data.role),
+        data.role &&
+          h("p", { class: "profile-role" }, [data.role, data.specialty].filter(Boolean).join(" · ")),
         data.tagline && h("p", { class: "profile-pitch" }, data.tagline),
         hasItems(meta) &&
           h(

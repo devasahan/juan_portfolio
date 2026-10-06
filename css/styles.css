@@ -1042,6 +1042,19 @@ button {
   font-size: 0.97rem;
 }
 
+.project-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.project-result .icon {
+  margin-top: 3px;
+  color: var(--accent);
+}
+
 .project-foot {
   display: grid;
   gap: 16px;

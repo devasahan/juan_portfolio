@@ -1,6 +1,6 @@
 # Juan Daniel Ramirez — Portfolio
 
-Portfolio site for Juan Daniel Ramirez, Senior Applied AI Engineer. Built with plain HTML, CSS, and JavaScript: no framework, no build step, no dependencies.
+Portfolio site for Juan Daniel Ramirez, Senior Software Engineer (AI & backend). Built with plain HTML, CSS, and JavaScript: no framework, no build step, no dependencies.
 
 **Features**
 
