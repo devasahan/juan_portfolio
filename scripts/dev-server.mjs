@@ -2,11 +2,14 @@
  * Zero-dependency dev server: serves the site on http://localhost:3000 and
  * reloads the browser whenever a file changes. Run it with `npm run dev`.
  *
- * Options: PORT=4000 npm run dev    use a different port
- *          npm run dev -- --no-open  don't open a browser tab
+ * In a Git clone it also pulls new commits from GitHub every 30 seconds, so
+ * changes pushed to the repo show up in the browser without re-downloading.
+ *
+ * Options: npm run dev -- --no-open  don't open a browser tab
+ *          npm run dev -- --no-sync  don't pull updates from GitHub
  */
-import { exec } from "node:child_process";
-import { watch } from "node:fs";
+import { exec, execFile } from "node:child_process";
+import { existsSync, watch } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, join, normalize, sep } from "node:path";
@@ -15,6 +18,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("..", import.meta.url)).replace(/[\\/]$/, "");
 const START_PORT = Number(process.env.PORT) || 3000;
 const IGNORED = /(^|[\\/])(\.|node_modules)|~$/;
+const SYNC_INTERVAL_MS = 30_000;
 
 const TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -81,12 +85,14 @@ const server = createServer(async (req, res) => {
   }
 });
 
+const log = (message) => console.log(`  ${new Date().toLocaleTimeString()}  ${message}`);
+
 let reloadTimer;
 function reload(changed) {
   if (!changed || IGNORED.test(changed)) return;
   clearTimeout(reloadTimer);
   reloadTimer = setTimeout(() => {
-    console.log(`  ${new Date().toLocaleTimeString()}  ${changed} changed, reloading`);
+    log(`${changed} changed, reloading`);
     for (const client of clients) client.write("data: reload\n\n");
   }, 100);
 }
@@ -104,6 +110,60 @@ function watchFiles() {
       }
     }
   }
+}
+
+function git(...args) {
+  return new Promise((resolve, reject) => {
+    execFile("git", args, { cwd: ROOT }, (error, stdout, stderr) =>
+      error ? reject(Object.assign(error, { stderr })) : resolve(stdout.trim()),
+    );
+  });
+}
+
+/**
+ * Fast-forwards to the latest commit on GitHub. The file watcher then reloads
+ * the browser. It never overwrites local edits: if a pull would, Git refuses
+ * and we just report it.
+ */
+function startAutoUpdate() {
+  if (process.argv.includes("--no-sync")) return;
+  if (!existsSync(join(ROOT, ".git"))) {
+    console.log("  Auto-update is off: this folder wasn't downloaded with `git clone`.\n");
+    return;
+  }
+
+  let busy = false;
+  let lastProblem = "";
+  const pull = async () => {
+    if (busy) return;
+    busy = true;
+    try {
+      const before = await git("rev-parse", "HEAD");
+      await git("pull", "--ff-only", "--quiet");
+      if ((await git("rev-parse", "HEAD")) !== before) log("Pulled the latest changes from GitHub");
+      lastProblem = "";
+    } catch (error) {
+      if (error.code === "ENOENT") {
+        log("Auto-update is off: Git isn't installed.");
+        clearInterval(timer);
+        return;
+      }
+      const output = (error.stderr || error.message).trim();
+      const edited = output.match(/^\t.+$/gm)?.map((line) => line.trim());
+      const problem =
+        /local changes/.test(output) && edited
+          ? `you've edited ${edited.join(", ")} here and the update changes it too. Undo your edit to get the update.`
+          : output.split("\n")[0];
+      if (problem !== lastProblem) log(`Skipped an update from GitHub: ${problem}`);
+      lastProblem = problem;
+    } finally {
+      busy = false;
+    }
+  };
+
+  const timer = setInterval(pull, SYNC_INTERVAL_MS);
+  pull();
+  console.log("  Checking GitHub for updates every 30 seconds.\n");
 }
 
 function openBrowser(address) {
@@ -132,6 +192,7 @@ server.once("listening", () => {
   console.log(`\n  Portfolio running at ${address}`);
   console.log("  Save any file and the browser reloads. Press Ctrl+C to stop.\n");
   watchFiles();
+  startAutoUpdate();
   openBrowser(address);
 });
 

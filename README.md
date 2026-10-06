@@ -14,15 +14,20 @@ Portfolio site for Juan Daniel Ramirez, Senior Applied AI Engineer. Built with p
 
 ## Run it locally
 
-With [Node.js](https://nodejs.org) 18 or newer installed, run this from the project folder:
+You need [Node.js](https://nodejs.org) 18+ and [Git](https://git-scm.com). Get the code once with Git:
 
 ```bash
+git clone -b claude/portfolio-build-qmphso https://github.com/devasahan/juan_portfolio.git
+cd juan_portfolio
 npm run dev
 ```
 
-It opens the site at http://localhost:3000 and **reloads the browser every time you save a file**. There's nothing to install first (no `npm install` needed) and no build step. Press `Ctrl+C` to stop it.
+`npm run dev` opens the site at http://localhost:3000. While it runs:
 
-Without Node.js, you can also just double-click `index.html`, but you'll need to refresh the page yourself after each change.
+- **Saving a file reloads the browser.**
+- **New changes pushed to GitHub show up automatically.** It checks every 30 seconds, pulls anything new, and the page reloads. It never overwrites edits you've made locally; if an update touches a file you've changed, it skips the update and tells you which file.
+
+There's no `npm install` and no build step. Press `Ctrl+C` to stop. Next time, open the folder and run `npm run dev` again; it pulls anything you missed when it starts.
 
 ## Update the content
 
