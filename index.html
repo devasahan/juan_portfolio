@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Juan — Software Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Juan, a software developer who designs and builds fast, accessible web apps."
+    />
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)" />
+
+    <!-- Link previews (Slack, LinkedIn, X, …) read these; crawlers don't run JS. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Juan — Software Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Juan, a software developer who designs and builds fast, accessible web apps."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Apply the saved theme before first paint to avoid a flash. -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        try {
+          var theme = localStorage.getItem("theme");
+          if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+    <script src="js/data.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" data-render="brand"></a>
+
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode">
+            <span data-icon="sun"></span>
+            <span data-icon="moon"></span>
+          </button>
+          <button
+            class="icon-btn menu-toggle"
+            type="button"
+            aria-controls="site-nav"
+            aria-expanded="false"
+            aria-label="Open menu"
+          >
+            <span data-icon="menu"></span>
+            <span data-icon="close"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <noscript>
+        <p class="container noscript">This portfolio needs JavaScript enabled to show its content.</p>
+      </noscript>
+
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="container hero-inner" data-render="hero"></div>
+      </section>
+
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">About</p>
+            <h2 class="section-title" id="about-title">A little about me</h2>
+          </header>
+          <div data-render="about"></div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="skills" aria-labelledby="skills-title">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">Skills</p>
+            <h2 class="section-title" id="skills-title">Skills &amp; tools</h2>
+            <p class="section-lead">The languages, frameworks, and tools I use to bring ideas to life.</p>
+          </header>
+          <div data-render="skills"></div>
+        </div>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">Work</p>
+            <h2 class="section-title" id="projects-title">Selected projects</h2>
+            <p class="section-lead">
+              A few things I've built recently, each of which taught me something new.
+            </p>
+          </header>
+          <div data-render="projects"></div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="experience" aria-labelledby="experience-title">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">Experience</p>
+            <h2 class="section-title" id="experience-title">Where I've worked</h2>
+          </header>
+          <div data-render="experience"></div>
+        </div>
+      </section>
+
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="container">
+          <div class="contact-card reveal">
+            <p class="eyebrow">Contact</p>
+            <h2 class="contact-title" id="contact-title">Let's build something together.</h2>
+            <p class="contact-text">
+              Have a project in mind, a role to fill, or just want to say hi? My inbox is always open, and
+              I'll get back to you as soon as I can.
+            </p>
+            <div data-render="contact"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner" data-render="footer"></div>
+    </footer>
+
+    <a class="icon-btn back-to-top" href="#top" aria-label="Back to top"><span data-icon="arrowUp"></span></a>
+  </body>
+</html>
