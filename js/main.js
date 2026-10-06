@@ -32,6 +32,14 @@
     sparkles:
       '<path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/><path d="M19 3v4M21 5h-4"/>',
     file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8M16 17H8M10 9H8"/>',
+    graduation:
+      '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
+    database:
+      '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+    cloud: '<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+    shield:
+      '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+    search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
     mapPin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
     briefcase:
       '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
@@ -162,7 +170,7 @@
         "h1",
         { class: "hero-title", id: "hero-title" },
         "Hi, I'm ",
-        h("span", { class: "accent-text" }, data.name),
+        h("span", { class: "accent-text" }, data.shortName || data.name),
         ".",
       ),
       data.role && h("p", { class: "hero-role" }, data.role),
@@ -188,10 +196,10 @@
   /** A small "about me" object styled like an editor window. */
   function renderCodeCard() {
     const varName =
-      (data.name || "me")
+      (data.shortName || data.name || "me")
         .split(/\s+/)[0]
         .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "")
+        .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase()
         .replace(/[^a-z0-9_$]/g, "")
         .replace(/^(?=\d)/, "_") || "me";
@@ -208,7 +216,7 @@
       data.focus.forEach((item) => lines.push(["    ", str(item), tok("punc", ",")]));
       lines.push(["  ", tok("punc", "],")]);
     }
-    lines.push(prop("available", tok("bool", String(Boolean(data.availability)))));
+    if (data.availability) lines.push(prop("available", tok("bool", "true")));
     lines.push([tok("punc", "};"), h("span", { class: "cursor" })]);
 
     const code = h(
@@ -238,6 +246,7 @@
     const facts = [
       data.location && { icon: "mapPin", label: "Based in", value: data.location },
       hasItems(data.focus) && { icon: "sparkles", label: "Focused on", value: data.focus.join(", ") },
+      data.education && { icon: "graduation", label: "Education", value: data.education },
       data.availability && { icon: "briefcase", label: "Status", value: data.availability },
     ].filter(Boolean);
 
@@ -345,6 +354,7 @@
               h("h3", { class: "project-title" }, project.title),
               project.featured && h("span", { class: "badge" }, "Featured"),
             ),
+            project.org && h("p", { class: "project-org" }, project.org),
             h("p", { class: "project-desc" }, project.description),
             h(
               "div",
@@ -366,8 +376,18 @@
 
     const grid = h("ul", { class: "project-grid" }, stagger(cards));
 
-    // Tag filters only earn their space once there are a few projects.
-    const tags = [...new Set(data.projects.flatMap((project) => project.tags || []))];
+    // Filter by tags that more than one project shares; a one-project tag
+    // filters down to a single card and just adds noise.
+    const counts = new Map();
+    data.projects
+      .flatMap((project) => project.tags || [])
+      .forEach((tag) => {
+        counts.set(tag, (counts.get(tag) || 0) + 1);
+      });
+    const tags = [...counts]
+      .filter(([, count]) => count > 1)
+      .sort((a, b) => b[1] - a[1])
+      .map(([tag]) => tag);
     let filters = null;
     if (data.projects.length > 3 && tags.length > 1) {
       const buttons = ["All", ...tags].map((tag) =>

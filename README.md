@@ -1,6 +1,6 @@
-# Juan — Portfolio
+# Juan Daniel Ramirez — Portfolio
 
-A personal portfolio site built with plain HTML, CSS, and JavaScript: no framework, no build step, no dependencies.
+Portfolio site for Juan Daniel Ramirez, Senior Applied AI Engineer. Built with plain HTML, CSS, and JavaScript: no framework, no build step, no dependencies.
 
 **Features**
 
@@ -22,13 +22,13 @@ npx serve .
 python3 -m http.server 8000
 ```
 
-## Make it yours
+## Update the content
 
-1. **Edit [`js/data.js`](js/data.js).** Every placeholder is marked `TODO`. This file controls your name, role, tagline, location, email, social links, about text, stats, skills, projects, and experience.
+1. **Edit [`js/data.js`](js/data.js).** This file controls the name, role, tagline, location, education, email, social links, about text, stats, skills, projects, and experience.
    - Remove a section by emptying its array (e.g. `experience: []`); its nav link disappears too.
-   - Set `availability: ""` to hide the "available" badge.
+   - Set `availability` (e.g. `"Open to new opportunities"`) to show a status badge; `""` hides it.
 2. **Add project screenshots** (optional): put images in `assets/projects/` and set each project's `image`, e.g. `"assets/projects/taskflow.png"`. A 16:9 ratio looks best.
-3. **Add your résumé** (optional): drop `resume.pdf` into `assets/` and set `resume: "assets/resume.pdf"`.
+3. **Résumé:** the PDF lives at `assets/Juan_Daniel_Ramirez_Resume.pdf`. Replace the file to update it, or set `resume: ""` to hide the button.
 4. **Update the `<head>` in [`index.html`](index.html):** the `<title>`, `description`, and `og:` tags. Link previews on LinkedIn, Slack, and X read these directly.
 5. **Section headings and the contact blurb** are plain text in `index.html` if you want to reword them.
 6. **Colors and fonts** are CSS variables at the top of [`css/styles.css`](css/styles.css). Change `--accent` and `--accent-2` to re-theme the whole site.
